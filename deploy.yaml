@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: appjr-pod
+  name: appjr-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appjr-pod
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: appjr-pod
+    spec:
+      containers:
+      - image: app-jr:app-jr
+        name: app-jr
+        ports:
+        - containerPort: 4000
+        resources: {}
+        env:
+        - name: NAME
+          valueFrom:
+            configMapKeyRef:
+              name: configmap
+              key: name
+status: {}
